@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &13042213
 Transform:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_jumpForce: 300
   m_groundLayers:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 1591
   m_groundCheck: {fileID: 1236424224576537655}
   m_groundCheckRadius: 0.15
   m_isGrounded: 0
@@ -374,7 +374,6 @@ MonoBehaviour:
   m_hittableLayers:
     serializedVersion: 2
     m_Bits: 512
-  m_damageDelay: 0.2
 --- !u!1 &1236424225872368980
 GameObject:
   m_ObjectHideFlags: 0
