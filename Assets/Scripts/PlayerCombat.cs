@@ -12,13 +12,14 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float m_attackInterval = 100f;
     [SerializeField] private GameObject m_damagePoint;
     [SerializeField] private float m_damageRadius = 0.5f;
+    [SerializeField] private float m_damageDelay = 0.5f;
     [SerializeField] private LayerMask m_hittableLayers;
     private bool m_mustAttack = false;
 
     void Awake()
     {
 
-        m_animator = GetComponent<Animator>();
+        m_animator = GetComponentInChildren<Animator>();
 
     }
 
@@ -35,11 +36,16 @@ public class PlayerCombat : MonoBehaviour
     }
 
 
-    public void onAttack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            m_mustAttack = true;
+            if (m_lastAttackTime + m_attackInterval < Time.time)
+            {
+                m_lastAttackTime = Time.time;
+                m_animator.SetTrigger("attack");
+                Invoke("CheckHits", m_damageDelay);
+            }
         }
     }
 
@@ -53,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     // Called by animation event
-    public void checkHits()
+    public void CheckHits()
     {
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(m_damagePoint.transform.position, m_damageRadius, m_hittableLayers);
         foreach (Collider2D item in hitObjects)
@@ -61,7 +67,7 @@ public class PlayerCombat : MonoBehaviour
             IHittable hittable = item.GetComponent<IHittable>();
             if (hittable != null)
             {
-                hittable.onHit(2f);
+                hittable.OnHit(2f);
             }
         }
     }

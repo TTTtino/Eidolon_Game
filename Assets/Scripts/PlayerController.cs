@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         m_rb2d = GetComponent<Rigidbody2D>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
-        m_animator = GetComponent<Animator>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        m_animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void onJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void onMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         m_controlDirection = context.ReadValue<Vector2>();
         if (context.started)
