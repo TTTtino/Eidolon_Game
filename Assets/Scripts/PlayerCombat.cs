@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, IHittable
 {
     // Start is called before the first frame update
-
+    private PlayerStats m_stats;
     private Animator m_animator;
     private float m_lastAttackTime = 0f;
     [SerializeField] private float m_attackInterval = 100f;
@@ -18,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Awake()
     {
-
+        m_stats = GetComponent<PlayerStats>();
         m_animator = GetComponentInChildren<Animator>();
 
     }
@@ -49,13 +50,11 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
-        if (m_damagePoint.activeSelf)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(m_damagePoint.transform.position, m_damageRadius);
-        }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(m_damagePoint.transform.position, m_damageRadius);
     }
 
     // Called by animation event
@@ -70,5 +69,20 @@ public class PlayerCombat : MonoBehaviour
                 hittable.OnHit(2f);
             }
         }
+    }
+
+    public void OnHit(float damageDealt)
+    {
+        m_stats.ReduceHealth(damageDealt);
+        if (m_stats.Health <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    private void OnDeath()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

@@ -5,11 +5,15 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour, IHittable
 {
 
-    protected enum EnemyState { IDLE, ROAMING, FOLLOWING, RETURNING };
+    protected enum EnemyState { IDLE, ROAMING, FOLLOWING, RETURNING, ATTACKING };
     [SerializeField] protected float m_health = 100f;
     [SerializeField] protected float m_moveSpeed = 2;
-    [SerializeField] protected bool m_boundFollow = false;
-    [SerializeField] protected float m_boundFollowRadius = 20f;
+    [SerializeField] protected float m_damage = 2;
+    [SerializeField] protected float m_damageRadius = 2;
+    [SerializeField] protected float m_damageDelay = 0.2f;
+
+    protected float m_lastAttackTime = 0f;
+    [SerializeField] protected float m_attackInterval = 100f;
     [SerializeField] protected GameObject m_targetPlayer;
 
 
@@ -36,6 +40,8 @@ public abstract class Enemy : MonoBehaviour, IHittable
     }
 
     protected abstract void OnDeath();
+
+
 
 
 

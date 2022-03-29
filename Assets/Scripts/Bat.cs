@@ -17,8 +17,9 @@ public class Bat : Enemy
     [SerializeField] private float m_roamingRadius;
     [SerializeField] private float m_maxFollowDistance;
     [SerializeField] private float m_detectionRadius;
-
     private float lastRoamTime = 0;
+
+    [SerializeField] private GameObject m_damagePoint;
 
     protected override void Awake()
     {
@@ -76,7 +77,7 @@ public class Bat : Enemy
 
     void FixedUpdate()
     {
-        if (Vector2.Distance(m_rb2d.position, m_targetPlayer.transform.position) < m_detectionRadius)
+        if (Vector2.Distance(m_rb2d.position, m_targetPlayer.transform.position) < m_detectionRadius && m_state != EnemyState.ATTACKING)
         {
             m_state = EnemyState.FOLLOWING;
         }
@@ -111,12 +112,21 @@ public class Bat : Enemy
                 }
                 break;
             case EnemyState.FOLLOWING:
+
                 if (m_targetPlayer != null)
                 {
-                    m_targetPosition = m_targetPlayer.transform.position;
-                    if (!IsInvoking("CalculatePath"))
-                        InvokeRepeating("CalculatePath", 0f, 0.5f);
-                    MoveToTarget();
+                    if (Vector2.Distance(m_rb2d.position, m_targetPlayer.transform.position) < 1f)
+                    {
+                        Attack();
+                    }
+                    else
+                    {
+
+                        m_targetPosition = m_targetPlayer.transform.position;
+                        if (!IsInvoking("CalculatePath"))
+                            InvokeRepeating("CalculatePath", 0f, 0.5f);
+                        MoveToTarget();
+                    }
                 }
                 break;
             case EnemyState.RETURNING:
@@ -136,6 +146,17 @@ public class Bat : Enemy
                         m_path = null;
                     }
                 }
+                break;
+            case EnemyState.ATTACKING:
+                if (m_targetPlayer.transform.position.x > m_rb2d.position.x)
+                {
+                    flip(true);
+                }
+                else
+                {
+                    flip(false);
+                }
+                Invoke("CheckHits", m_damage);
                 break;
             default:
                 break;
@@ -271,6 +292,32 @@ public class Bat : Enemy
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, m_roamingRadius);
 
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(m_damagePoint.transform.position, m_damageRadius);
+    }
+
+    public void CheckHits()
+    {
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(m_damagePoint.transform.position, m_damageRadius, LayerMask.GetMask("Player"));
+        foreach (Collider2D item in hitObjects)
+        {
+            IHittable hittable = item.GetComponent<IHittable>();
+            if (hittable != null && item.tag == "Player")
+            {
+                m_animator.SetTrigger("attack");
+                hittable.OnHit(m_damage);
+            }
+        }
+        m_state = EnemyState.FOLLOWING;
+    }
+
+    void Attack()
+    {
+        if (m_lastAttackTime + m_attackInterval < Time.time)
+        {
+            m_lastAttackTime = Time.time;
+            CheckHits();
         }
     }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13042212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.93, y: -0.407, z: 0}
+  m_LocalPosition: {x: 0.93, y: -0.236, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1236424225717936139}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 379068756}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1591
   m_groundCheck: {fileID: 1236424224576537655}
-  m_groundCheckRadius: 0.15
+  m_groundCheckRadius: 0.05
   m_isGrounded: 0
 --- !u!50 &1236424225717936142
 Rigidbody2D:
@@ -401,6 +401,7 @@ MonoBehaviour:
   m_attackInterval: 0.3
   m_damagePoint: {fileID: 13042212}
   m_damageRadius: 0.5
+  m_damageDelay: 0.2
   m_hittableLayers:
     serializedVersion: 2
     m_Bits: 512
