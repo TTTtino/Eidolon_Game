@@ -8,65 +8,47 @@ public class PlayerCombat : MonoBehaviour, IHittable
 {
     // Start is called before the first frame update
     private PlayerStats m_stats;
-    private Animator m_animator;
+    [SerializeField] private Weapon m_activeWeapon;
+
     private float m_lastAttackTime = 0f;
     [SerializeField] private float m_attackInterval = 100f;
-    [SerializeField] private GameObject m_damagePoint;
-    [SerializeField] private float m_damageRadius = 0.5f;
-    [SerializeField] private float m_damageDelay = 0.5f;
-    [SerializeField] private LayerMask m_hittableLayers;
     private bool m_mustAttack = false;
 
     void Awake()
     {
         m_stats = GetComponent<PlayerStats>();
-        m_animator = GetComponentInChildren<Animator>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (m_lastAttackTime + m_attackInterval < Time.time && m_mustAttack)
         {
             m_lastAttackTime = Time.time;
-            m_animator.SetTrigger("attack");
+            m_activeWeapon.FireProjectile();
         }
-
-        m_mustAttack = false;
+        Vector2 aimDir = Mouse.current.position.ReadValue() - (Vector2)Camera.main.WorldToScreenPoint(m_activeWeapon.transform.position);
+        aimDir.Normalize();
+        Debug.Log(aimDir);
+        if (m_activeWeapon != null)
+        {
+            float angle = Mathf.Atan2(aimDir.x, aimDir.y) * Mathf.Rad2Deg;
+            m_activeWeapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+        }
     }
 
-
-    public void OnAttack(InputAction.CallbackContext context)
+    public void FireWeapon(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (m_activeWeapon != null)
         {
-            if (m_lastAttackTime + m_attackInterval < Time.time)
+            if (context.started)
             {
-                m_lastAttackTime = Time.time;
-                m_animator.SetTrigger("attack");
-                Invoke("CheckHits", m_damageDelay);
+                m_mustAttack = true;
             }
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(m_damagePoint.transform.position, m_damageRadius);
-    }
-
-    // Called by animation event
-    public void CheckHits()
-    {
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(m_damagePoint.transform.position, m_damageRadius, m_hittableLayers);
-        foreach (Collider2D item in hitObjects)
-        {
-            IHittable hittable = item.GetComponent<IHittable>();
-            if (hittable != null)
+            else if (context.canceled)
             {
-                hittable.OnHit(2f);
+                m_mustAttack = false;
             }
         }
     }

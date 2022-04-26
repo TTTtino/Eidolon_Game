@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform m_groundCheck;
     [SerializeField] private float m_groundCheckRadius;
     private Vector2 m_controlDirection = Vector2.zero;
-    private Rigidbody2D m_rb2d;
+    public Rigidbody2D m_rb2d;
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
     private bool m_mustJump = false;
     [SerializeField] private bool m_isGrounded = false;
-    private bool m_isLeft;
+    public bool m_isLeft;
     private Vector3 m_velocity = Vector3.zero;
+    private Vector2 m_aimDir;
 
     void Awake()
     {
@@ -32,6 +33,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float xDelta = Mouse.current.position.ReadValue().x - Camera.main.WorldToScreenPoint(transform.position).x;
+        if (m_controlDirection != Vector2.zero && m_isGrounded)
+        {
+            m_isLeft = (m_controlDirection.x < 0) ? true : false;
+        }
+        else
+        {
+            m_isLeft = (xDelta < 0) ? true : false;
+        }
 
         if (m_isLeft)
         {
@@ -96,11 +106,6 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         m_controlDirection = context.ReadValue<Vector2>();
-        if (context.started)
-        {
-
-            m_isLeft = (m_controlDirection.x < 0) ? true : false;
-        }
     }
 
     void OnDrawGizmos()
