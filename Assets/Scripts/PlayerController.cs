@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform m_groundCheck;
     [SerializeField] private float m_groundCheckRadius;
     private Vector2 m_controlDirection = Vector2.zero;
+    public Vector2 ControlDirection { get { return m_controlDirection; } }
     public Rigidbody2D m_rb2d;
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         if (m_mustJump)
         {
             m_mustJump = false;
+            m_controlDirection.y = 0;
             if (m_isGrounded || m_jumpCount < m_maxJump)
             {
                 m_isGrounded = false;
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             m_mustJump = true;
+            m_controlDirection.y = 1;
         }
     }
 

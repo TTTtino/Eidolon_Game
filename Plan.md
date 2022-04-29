@@ -26,6 +26,7 @@ Move around, complete puzzles
 - [x] Target
 - [x] Pressure Plate
   - [x] Weight Activated
+- [ ] Camera (Player Detection)
 
 ### Enemy Types
 

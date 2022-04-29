@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] float m_moveToPlayerSpeed;
     Rigidbody2D m_rb2d;
     private Vector3 m_targetPosition;
-    Vector3 m_pOffset;
+    [SerializeField] Vector2 m_pOffset;
     public int m_projectileIndex = 0;
     public Projectile[] m_projectiles;
     public Projectile m_currentProjectile;
@@ -26,22 +26,28 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_pOffset = m_attachedPlayer.transform.position - transform.position;
-        m_currentProjectileUI.sprite = m_currentProjectile.GetComponentInChildren<SpriteRenderer>().sprite;
+        if (m_attachedPlayer != null)
+        {
+            m_currentProjectileUI.sprite = m_currentProjectile.GetComponentInChildren<SpriteRenderer>().sprite;
+        }
         m_rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 offset = m_pOffset;
-        if (m_attachedPlayer.m_isLeft)
+        if (m_attachedPlayer != null)
         {
-            offset.x *= -1;
-        }
-        m_targetPosition = m_attachedPlayer.m_rb2d.position - offset;
+            Vector2 offset = m_pOffset;
+            if (m_attachedPlayer.m_isLeft)
+            {
+                offset.x *= -1;
+            }
+            m_targetPosition = m_attachedPlayer.m_rb2d.position - offset;
 
-        m_rb2d.MovePosition(Vector3.MoveTowards(m_rb2d.position, m_targetPosition, m_moveToPlayerSpeed * (Vector3.Distance(m_targetPosition, m_rb2d.position) / 50f)));
+            m_rb2d.MovePosition(Vector3.MoveTowards(m_rb2d.position, m_targetPosition, m_moveToPlayerSpeed * (Vector3.Distance(m_targetPosition, m_rb2d.position) / 50f)));
+        }
+
     }
 
     public void SwitchProjectile(int index)
