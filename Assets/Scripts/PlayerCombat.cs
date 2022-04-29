@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
     private PlayerStats m_stats;
     [SerializeField] private Weapon m_activeWeapon;
 
-    private float m_lastAttackTime = 0f;
+    private float m_lastAttackTime = -1000f;
     [SerializeField] private float m_attackInterval = 100f;
     private bool m_mustAttack = false;
 
@@ -22,7 +22,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
     // Update is called once per frame
     void Update()
     {
-
+        m_attackInterval = m_activeWeapon.m_currentProjectile.GetCooldown();
         if (m_lastAttackTime + m_attackInterval < Time.time && m_mustAttack)
         {
             m_lastAttackTime = Time.time;
@@ -30,7 +30,6 @@ public class PlayerCombat : MonoBehaviour, IHittable
         }
         Vector2 aimDir = Mouse.current.position.ReadValue() - (Vector2)Camera.main.WorldToScreenPoint(m_activeWeapon.transform.position);
         aimDir.Normalize();
-        Debug.Log(aimDir);
         if (m_activeWeapon != null)
         {
             float angle = Mathf.Atan2(aimDir.x, aimDir.y) * Mathf.Rad2Deg;
@@ -49,6 +48,33 @@ public class PlayerCombat : MonoBehaviour, IHittable
             else if (context.canceled)
             {
                 m_mustAttack = false;
+            }
+        }
+    }
+
+    public void SwitchWeapon(InputAction.CallbackContext context)
+    {
+        if (m_activeWeapon != null)
+        {
+            if (context.started)
+            {
+                int x = 0;
+
+                if (context.ReadValue<float>() > 0)
+                {
+                    x += 1;
+                }
+                else if (context.ReadValue<float>() < 0)
+                {
+                    x -= 1;
+                }
+
+                int m = (m_activeWeapon.m_projectileIndex + x) % m_activeWeapon.m_projectiles.Length;
+                if (m < 0)
+                {
+                    m += m_activeWeapon.m_projectiles.Length;
+                }
+                m_activeWeapon.SwitchProjectile(m);
             }
         }
     }

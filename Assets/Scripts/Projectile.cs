@@ -2,27 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
     [SerializeField] protected float m_damage = 0.0f;
-    public Rigidbody2D rb2d;
-    protected void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-    }
+    [SerializeField] protected float m_speed = 10.0f;
+    [SerializeField] protected float m_cooldown = 10.0f;
+    [SerializeField] protected bool m_destroyOnCollision = true;
 
-    protected void Start()
+    public bool m_isActive = false;
+
+    protected Rigidbody2D m_rb2d;
+    protected virtual void Awake()
     {
-        Move();
+        m_rb2d = GetComponent<Rigidbody2D>();
     }
 
     protected void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
+        OnCollide(other);
+        if (m_destroyOnCollision)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    protected virtual void Move()
+    protected virtual void OnCollide(Collision2D other)
     {
-        rb2d.AddForce(transform.up * 10f, ForceMode2D.Impulse);
+
     }
+
+    public void addSpawnVelocity(Vector2 sVel)
+    {
+        m_rb2d.velocity += sVel;
+    }
+
+    public float GetCooldown()
+    {
+        return m_cooldown;
+    }
+
 }

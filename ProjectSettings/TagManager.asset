@@ -12,14 +12,14 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Player_Weapon
   - Player
   - Enemy
   - Environment
   - FriendlyProjectile
   - EnemyProjectile
-  - 
-  - 
+  - Pickups
+  - Col_Pickups
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3050651665
+    locked: 0
+  - name: Midground
+    uniqueID: 3311854391
+    locked: 0
+  - name: Terrain
+    uniqueID: 366604087
+    locked: 0
+  - name: Foreground
+    uniqueID: 4096742547
     locked: 0

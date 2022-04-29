@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
     private bool m_mustJump = false;
+    private int m_jumpCount = 0;
+    public int m_maxJump = 2;
     [SerializeField] private bool m_isGrounded = false;
     public bool m_isLeft;
     private Vector3 m_velocity = Vector3.zero;
-    private Vector2 m_aimDir;
+    private Liftable m_heldItem;
+    public Transform m_holdPosition;
 
     void Awake()
     {
@@ -65,6 +69,7 @@ public class PlayerController : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 m_isGrounded = true;
+                m_jumpCount = 0;
                 break;
             }
         }
@@ -82,10 +87,10 @@ public class PlayerController : MonoBehaviour
         if (m_mustJump)
         {
             m_mustJump = false;
-            if (m_isGrounded)
+            if (m_isGrounded || m_jumpCount < m_maxJump)
             {
                 m_isGrounded = false;
-
+                m_jumpCount++;
                 Vector2 v = m_rb2d.velocity;
                 v.y = 0;
                 m_rb2d.velocity = v;
@@ -108,10 +113,83 @@ public class PlayerController : MonoBehaviour
         m_controlDirection = context.ReadValue<Vector2>();
     }
 
-    void OnDrawGizmos()
+    public void OnPickUp(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (m_heldItem == null)
+            {
+                Liftable nearestItem = GetNearestLiftable();
+                if (nearestItem != null)
+                {
+                    nearestItem.PickUpItem(gameObject);
+                    m_heldItem = nearestItem;
+                }
+            }
+            else
+            {
+                DropHeldItem();
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(m_groundCheck.position, m_groundCheckRadius);
+    }
+
+    public Vector2 GetRBVelocity()
+    {
+        return m_rb2d.velocity;
+    }
+
+    private Liftable GetNearestLiftable()
+    {
+        float nearestDist = float.MaxValue;
+        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, 2.0f);
+        Liftable item = null;
+        foreach (Collider2D hitCol in nearbyColliders)
+        {
+            Liftable i = hitCol.GetComponent<Liftable>();
+            float dist = Vector2.Distance(transform.position, hitCol.transform.position);
+            if (i != null && dist < nearestDist)
+            {
+                item = i;
+                nearestDist = dist;
+            }
+        }
+        return item;
+    }
+
+    public void UseHeldItem(InputAction.CallbackContext context)
+    {
+        if (context.started && m_heldItem != null)
+        {
+            // Check if Interactor
+            IInteractor i = m_heldItem.gameObject.GetComponent<IInteractor>();
+            if (i != null)
+            {
+                i.Use();
+            }
+        }
+    }
+
+    public void DropHeldItem()
+    {
+        m_heldItem.DropItem();
+        m_heldItem = null;
+    }
+
+    public void TeleportToPosition(Vector3 position)
+    {
+        transform.position = position;
+        m_rb2d.velocity = Vector2.zero;
+    }
+
+    public void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 

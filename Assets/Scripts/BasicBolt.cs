@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class BasicBolt : Projectile
 {
-    // Start is called before the first frame update
+    void Start()
+    {
+        m_rb2d.gravityScale = 0f;
+        m_rb2d.AddForce(transform.up * m_speed, ForceMode2D.Impulse);
+    }
 }
