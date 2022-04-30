@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private int m_jumpCount = 0;
     public int m_maxJump = 2;
     [SerializeField] private bool m_isGrounded = false;
+    public bool Grounded { get { return m_isGrounded; } }
     public bool m_isLeft;
     private Vector3 m_velocity = Vector3.zero;
     private Liftable m_heldItem;

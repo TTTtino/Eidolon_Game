@@ -6,9 +6,9 @@ public abstract class Enemy : MonoBehaviour, IHittable
 {
 
     protected enum EnemyState { IDLE, ROAMING, FOLLOWING, RETURNING, ATTACKING };
-    [SerializeField] protected float m_health = 100f;
+    [SerializeField] protected int m_health = 10;
     [SerializeField] protected float m_moveSpeed = 2;
-    [SerializeField] protected float m_damage = 2;
+    [SerializeField] protected int m_damage = 2;
     [SerializeField] protected float m_damageRadius = 2;
     [SerializeField] protected float m_damageDelay = 0.2f;
 
@@ -25,7 +25,7 @@ public abstract class Enemy : MonoBehaviour, IHittable
         m_animator = GetComponent<Animator>();
     }
 
-    public virtual void OnHit(float damageDealt)
+    public virtual void OnHit(int damageDealt)
     {
         if (m_health > 0)
         {
@@ -33,7 +33,7 @@ public abstract class Enemy : MonoBehaviour, IHittable
             m_animator.SetTrigger("hit");
             if (m_health <= 0)
             {
-                m_health = 0f;
+                m_health = 0;
                 OnDeath();
             }
         }

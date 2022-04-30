@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
 {
     // Start is called before the first frame update
     private PlayerStats m_stats;
+    public PlayerStats Stats { get { return m_stats; } }
     [SerializeField] private Weapon m_activeWeapon;
 
     private float m_lastAttackTime = -1000f;
@@ -79,7 +80,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
         }
     }
 
-    public void OnHit(float damageDealt)
+    public void OnHit(int damageDealt)
     {
         m_stats.ReduceHealth(damageDealt);
         if (m_stats.Health <= 0)
