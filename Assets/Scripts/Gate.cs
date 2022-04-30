@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Gate : MonoBehaviour, IInteractable
 {
+    public AudioClip m_sound;
+    private AudioSource m_source;
     [SerializeField] bool isOpen = false;
     [SerializeField] UnityEvent m_openEvents;
     [SerializeField] UnityEvent m_closeEvents;
@@ -19,6 +21,8 @@ public class Gate : MonoBehaviour, IInteractable
         {
             CloseGate();
         }
+
+        m_source = GetComponent<AudioSource>();
     }
     public void Interact(GameObject interactor)
     {
@@ -29,11 +33,13 @@ public class Gate : MonoBehaviour, IInteractable
 
     public void Open()
     {
-        if (isOpen == false)
+        if (!isOpen)
         {
             Debug.Log("Gate Opening");
             OpenGate();
             m_openEvents.Invoke();
+
+            m_source.PlayOneShot(m_sound);
 
         }
     }
@@ -51,6 +57,8 @@ public class Gate : MonoBehaviour, IInteractable
             Debug.Log("Gate Opening");
             CloseGate();
             m_closeEvents.Invoke();
+
+            m_source.PlayOneShot(m_sound);
         }
     }
 

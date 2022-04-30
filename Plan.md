@@ -13,6 +13,12 @@ Move around, complete puzzles
 
 ## Game Mechanics
 
+### Player
+
+- [ ] Player Health
+- [ ] Stunned?
+- [ ]
+
 ### Puzzle Types
 
 - [x] Find key -> unlock door
@@ -26,7 +32,6 @@ Move around, complete puzzles
 - [x] Target
 - [x] Pressure Plate
   - [x] Weight Activated
-- [ ] Camera (Player Detection)
 
 ### Enemy Types
 
@@ -62,6 +67,7 @@ Move around, complete puzzles
 - [x] Spike
 - [x] Activating Spike
 - [x] Swinging Axe
+- [ ] Camera (Player Detection) (Activates other objects)
 
 ### Weapon Types
 

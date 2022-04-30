@@ -181,6 +181,11 @@ public class PlayerController : MonoBehaviour
     public void DropHeldItem()
     {
         m_heldItem.DropItem();
+        Rigidbody2D rb2d = m_heldItem.GetComponent<Rigidbody2D>();
+        if (rb2d != null)
+        {
+            rb2d.velocity = m_rb2d.velocity;
+        }
         m_heldItem = null;
     }
 

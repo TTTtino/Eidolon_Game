@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Liftable : MonoBehaviour
 {
+    public AudioClip[] m_impactSounds;
+    private AudioSource m_source;
     PlayerController m_holder;
     Rigidbody2D m_rb2d;
 
     private void Start()
     {
         m_rb2d = GetComponent<Rigidbody2D>();
+        m_source = GetComponent<AudioSource>();
     }
     public void DropItem()
     {
@@ -39,6 +42,14 @@ public class Liftable : MonoBehaviour
         {
             m_holder.DropHeldItem();
 
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (m_source != null && m_impactSounds.Length > 0 && other.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            m_source.PlayOneShot(m_impactSounds[Random.Range(0, m_impactSounds.Length)]);
         }
     }
 }

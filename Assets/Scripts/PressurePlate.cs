@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
+    public AudioClip m_sound;
+    private AudioSource m_source;
     [SerializeField] UnityEvent m_onEnter;
     [SerializeField] UnityEvent m_onExit;
     public bool m_pressed;
@@ -15,6 +17,7 @@ public class PressurePlate : MonoBehaviour
     private void Awake()
     {
         m_animator = GetComponent<Animator>();
+        m_source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -67,16 +70,26 @@ public class PressurePlate : MonoBehaviour
 
     private void PlateDown()
     {
-        m_pressed = true;
-        m_animator.SetBool("pressed", true);
-        m_onEnter.Invoke();
+        if (!m_pressed)
+        {
+            m_pressed = true;
+            m_animator.SetBool("pressed", true);
+            m_source.PlayOneShot(m_sound);
+            m_onEnter.Invoke();
+
+        }
     }
 
     private void PlateUp()
     {
-        m_pressed = false;
-        m_animator.SetBool("pressed", false);
-        m_onExit.Invoke();
+        if (m_pressed)
+        {
+            m_pressed = false;
+            m_animator.SetBool("pressed", false);
+            m_source.PlayOneShot(m_sound);
+            m_onExit.Invoke();
+
+        }
     }
 
 

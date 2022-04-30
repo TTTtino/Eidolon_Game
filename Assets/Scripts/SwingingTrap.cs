@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SwingingTrap : MonoBehaviour
 {
+    public AudioClip m_sound;
+    private AudioSource m_source;
     [Range(0f, 20f)] public float m_swingSpeed;
     [SerializeField] private bool m_swinging;
     public bool Swinging
@@ -31,13 +33,21 @@ public class SwingingTrap : MonoBehaviour
     [SerializeField] Sprite m_offSprite;
     [SerializeField] Sprite m_onSprite;
 
+    private void Start()
+    {
+
+        m_source = GetComponent<AudioSource>();
+    }
     void Update()
     {
         if (Swinging)
         {
             m_time += Time.deltaTime * m_swingSpeed;
             transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, 0, -m_maxAngle), Quaternion.Euler(0, 0, +m_maxAngle), (Mathf.Sin(m_time) + 1) / 2);
-
+            if (transform.rotation.eulerAngles.z > -2 && transform.rotation.eulerAngles.z < 2)
+            {
+                m_source.PlayOneShot(m_sound);
+            }
         }
     }
 

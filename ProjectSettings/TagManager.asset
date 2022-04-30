@@ -20,7 +20,7 @@ TagManager:
   - EnemyProjectile
   - Pickups
   - Col_Pickups
-  - 
+  - Traps
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backdrop
+    uniqueID: 2537163663
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
