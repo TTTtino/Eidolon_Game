@@ -100,6 +100,10 @@ public class PlayerController : MonoBehaviour
                 m_rb2d.AddForce(new Vector2(0f, m_jumpForce));
             }
         }
+        if (GetComponent<PlayerStats>().Health <= 0)
+        {
+            Die();
+        }
 
     }
 

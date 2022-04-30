@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 public class Sensor : MonoBehaviour
 {
     [SerializeField] UnityEvent m_onDetected;

@@ -15,9 +15,8 @@ Move around, complete puzzles
 
 ### Player
 
-- [ ] Player Health
+- [x] Player Health
 - [ ] Stunned?
-- [ ]
 
 ### Puzzle Types
 
@@ -28,7 +27,7 @@ Move around, complete puzzles
 ### Interactable Objects
 
 - [x] Gate
-- [ ] Turret (Enemy)
+- [x] Turret (Enemy)
 - [x] Target
 - [x] Pressure Plate
   - [x] Weight Activated
@@ -37,9 +36,9 @@ Move around, complete puzzles
 
 #### Basic
 
-- [ ] Turret
-  - [ ] Aiming
-  - [ ] Shooting
+- [x] Turret
+  - [x] Aiming
+  - [x] Shooting
     - [ ] Homing Rounds
   - [ ] Turn off/on
   - [ ] Weak to Electric Bolt
@@ -67,7 +66,7 @@ Move around, complete puzzles
 - [x] Spike
 - [x] Activating Spike
 - [x] Swinging Axe
-- [ ] Camera (Player Detection) (Activates other objects)
+- [x] Camera (Player Detection) (Activates other objects)
 
 ### Weapon Types
 

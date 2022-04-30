@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 411640375393253531}
   - component: {fileID: 755755631}
   - component: {fileID: 9172531707185031717}
+  - component: {fileID: 4568419976864089101}
   m_Layer: 11
   m_Name: BasicBolt
   m_TagString: Untagged
@@ -267,3 +268,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4568419976864089101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621144335618298216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0967ef68dbd35bc41b0bef3d2bc7fb21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_damageAmount: 1
+  m_damageInterval: 5

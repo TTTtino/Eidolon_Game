@@ -56,7 +56,6 @@ public class Weapon : MonoBehaviour
         {
             if (m_projectiles[index].m_isActive)
             {
-                Debug.Log(index + " < " + m_projectiles.Length);
                 m_currentProjectile = m_projectiles[index];
                 m_projectileIndex = index;
                 m_currentProjectileUI.sprite = m_currentProjectile.GetComponentInChildren<SpriteRenderer>().sprite;
