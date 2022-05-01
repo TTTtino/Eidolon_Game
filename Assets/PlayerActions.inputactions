@@ -292,17 +292,6 @@
                 },
                 {
                     "name": "",
-                    "id": "521a8e83-18e4-48b2-97d9-356275daa276",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "PickUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ff0b5f15-8271-4dac-b3e4-9d936c680907",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",

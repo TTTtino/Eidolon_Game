@@ -9,7 +9,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
     // Start is called before the first frame update
     private PlayerStats m_stats;
     public PlayerStats Stats { get { return m_stats; } }
-    [SerializeField] private Weapon m_activeWeapon;
+    public Weapon m_activeWeapon;
 
     private float m_lastAttackTime = -1000f;
     [SerializeField] private float m_attackInterval = 100f;
@@ -23,16 +23,20 @@ public class PlayerCombat : MonoBehaviour, IHittable
     // Update is called once per frame
     void Update()
     {
-        m_attackInterval = m_activeWeapon.m_currentProjectile.GetCooldown();
-        if (m_lastAttackTime + m_attackInterval < Time.time && m_mustAttack)
+        if (m_activeWeapon != null && m_stats.Health > 0)
         {
-            m_lastAttackTime = Time.time;
-            m_activeWeapon.FireProjectile();
-        }
-        Vector2 aimDir = Mouse.current.position.ReadValue() - (Vector2)Camera.main.WorldToScreenPoint(m_activeWeapon.transform.position);
-        aimDir.Normalize();
-        if (m_activeWeapon != null)
-        {
+            if (m_activeWeapon.m_currentProjectile != null)
+            {
+                m_attackInterval = m_activeWeapon.m_currentProjectile.GetCooldown();
+                if (m_lastAttackTime + m_attackInterval < Time.time && m_mustAttack)
+                {
+                    m_lastAttackTime = Time.time;
+                    m_activeWeapon.FireProjectile();
+                }
+
+            }
+            Vector2 aimDir = Mouse.current.position.ReadValue() - (Vector2)Camera.main.WorldToScreenPoint(m_activeWeapon.transform.position);
+            aimDir.Normalize();
             float angle = Mathf.Atan2(aimDir.x, aimDir.y) * Mathf.Rad2Deg;
             m_activeWeapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
         }
@@ -40,7 +44,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
 
     public void FireWeapon(InputAction.CallbackContext context)
     {
-        if (m_activeWeapon != null)
+        if (m_activeWeapon != null && m_stats.Health > 0)
         {
             if (context.started)
             {
@@ -55,7 +59,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
 
     public void SwitchWeapon(InputAction.CallbackContext context)
     {
-        if (m_activeWeapon != null)
+        if (m_activeWeapon != null && m_activeWeapon.Projectiles.Count > 0 && m_stats.Health > 0)
         {
             if (context.started)
             {
@@ -70,10 +74,10 @@ public class PlayerCombat : MonoBehaviour, IHittable
                     x -= 1;
                 }
 
-                int m = (m_activeWeapon.m_projectileIndex + x) % m_activeWeapon.m_projectiles.Length;
+                int m = (m_activeWeapon.m_projectileIndex + x) % m_activeWeapon.Projectiles.Count;
                 if (m < 0)
                 {
-                    m += m_activeWeapon.m_projectiles.Length;
+                    m += m_activeWeapon.Projectiles.Count;
                 }
                 m_activeWeapon.SwitchProjectile(m);
             }
@@ -93,5 +97,10 @@ public class PlayerCombat : MonoBehaviour, IHittable
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void WeaponPickedUp(Weapon weapon)
+    {
+        m_activeWeapon = weapon;
     }
 }

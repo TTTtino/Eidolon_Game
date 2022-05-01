@@ -8,24 +8,24 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int m_maxHealth = 10;
 
     private int m_damage = 1;
-    public float Health { get { return m_health; } }
-    public float MaxHealth { get { return m_maxHealth; } }
-    public float Damage { get { return m_damage; } }
+    public int Health
+    {
+        get { return m_health; }
+        set
+        {
+            m_health = value;
+            if (m_health > m_maxHealth)
+            {
+                m_health = m_maxHealth;
+            }
+        }
+    }
+    public int MaxHealth { get { return m_maxHealth; } set { m_maxHealth = value; } }
+    public int Damage { get { return m_damage; } }
 
     private void Start()
     {
-        if (m_maxHealth > 20)
-        {
-            m_maxHealth = 20;
-        }
-        if (m_health > 20)
-        {
-            m_health = 20;
-        }
-        if (m_health > m_maxHealth)
-        {
-            m_maxHealth = m_health;
-        }
+        m_health = m_maxHealth;
     }
     public void ReduceHealth(int amount)
     {

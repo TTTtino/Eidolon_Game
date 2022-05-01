@@ -14,12 +14,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask m_groundLayers;
     [SerializeField] private Transform m_groundCheck;
     [SerializeField] private float m_groundCheckRadius;
+    private int m_starsCollected = 0;
+    public int StarsCollected { get { return m_starsCollected; } }
     private Vector2 m_controlDirection = Vector2.zero;
+    private PlayerStats m_stats;
     public Vector2 ControlDirection { get { return m_controlDirection; } }
     public Rigidbody2D m_rb2d;
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
     private bool m_mustJump = false;
+    public bool m_controllable = true;
     private int m_jumpCount = 0;
     public int m_maxJump = 2;
     [SerializeField] private bool m_isGrounded = false;
@@ -28,17 +32,22 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_velocity = Vector3.zero;
     private Liftable m_heldItem;
     public Transform m_holdPosition;
+    public GameObject m_onDeathCanvas;
 
     void Awake()
     {
         m_rb2d = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_animator = GetComponentInChildren<Animator>();
+        m_stats = GetComponent<PlayerStats>();
+        m_starsCollected = 0;
+        m_controllable = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!m_controllable) return;
         float xDelta = Mouse.current.position.ReadValue().x - Camera.main.WorldToScreenPoint(transform.position).x;
         if (m_controlDirection != Vector2.zero && m_isGrounded)
         {
@@ -64,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!m_controllable) return;
         m_isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_groundCheck.position, m_groundCheckRadius, m_groundLayers);
         for (int i = 0; i < colliders.Length; i++)
@@ -100,7 +110,7 @@ public class PlayerController : MonoBehaviour
                 m_rb2d.AddForce(new Vector2(0f, m_jumpForce));
             }
         }
-        if (GetComponent<PlayerStats>().Health <= 0)
+        if (m_stats.Health <= 0)
         {
             Die();
         }
@@ -109,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && m_controllable)
         {
             m_mustJump = true;
             m_controlDirection.y = 1;
@@ -123,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickUp(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && m_controllable)
         {
             if (m_heldItem == null)
             {
@@ -172,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
     public void UseHeldItem(InputAction.CallbackContext context)
     {
-        if (context.started && m_heldItem != null)
+        if (context.started && m_heldItem != null && m_controllable)
         {
             // Check if Interactor
             IInteractor i = m_heldItem.gameObject.GetComponent<IInteractor>();
@@ -185,13 +195,16 @@ public class PlayerController : MonoBehaviour
 
     public void DropHeldItem()
     {
-        m_heldItem.DropItem();
-        Rigidbody2D rb2d = m_heldItem.GetComponent<Rigidbody2D>();
-        if (rb2d != null)
+        if (m_heldItem != null)
         {
-            rb2d.velocity = m_rb2d.velocity;
+            m_heldItem.DropItem();
+            Rigidbody2D rb2d = m_heldItem.GetComponent<Rigidbody2D>();
+            if (rb2d != null)
+            {
+                rb2d.velocity = m_rb2d.velocity;
+            }
+            m_heldItem = null;
         }
-        m_heldItem = null;
     }
 
     public void TeleportToPosition(Vector3 position)
@@ -202,7 +215,20 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ShowOnDeathScreen();
+        m_stats.Health = 0;
+        m_controllable = false;
+        DropHeldItem();
+    }
+
+    public void ShowOnDeathScreen()
+    {
+        m_onDeathCanvas.SetActive(true);
+    }
+
+    public void StarCollected()
+    {
+        m_starsCollected++;
     }
 
 
