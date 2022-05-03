@@ -101,3 +101,6 @@ Move around, complete puzzles
 2. Eidolon gains Electric Bolt
 3. Basic Electric Bolt tutorial (Fight some turrets- now easier with stunning)
 4. Switch Tutorial
+
+- [ ] Make scrolling to change weapon more clear
+- [ ] Make electric switch diagram more clear

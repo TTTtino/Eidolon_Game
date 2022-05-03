@@ -22,8 +22,6 @@ public class Crab : MonoBehaviour
     float xMoveDir = 1;
     EnemyStats m_stats;
     private bool m_dead = false;
-    public GameObject m_droppedItem;
-    public int m_itemsToDrop;
 
     private void Start()
     {
@@ -130,21 +128,12 @@ public class Crab : MonoBehaviour
     void Die()
     {
         m_dead = true;
+        GetComponent<DamagePlayerOnContact>().m_active = false;
         GetComponentInChildren<Animator>().SetTrigger("death");
         Destroy(gameObject, 3f);
-        DropItem();
         m_onDeath.Invoke();
     }
 
 
-    void DropItem()
-    {
-        for (int i = 0; i < m_itemsToDrop; i++)
-        {
-            GameObject dropI = Instantiate(m_droppedItem, transform.position + Vector3.up * 0.1f, Quaternion.identity);
-            Rigidbody2D rb = dropI.GetComponent<Rigidbody2D>();
-            if (rb != null) rb.AddForce(Vector2.up * 4f, ForceMode2D.Impulse);
-        }
 
-    }
 }

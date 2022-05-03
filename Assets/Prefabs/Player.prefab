@@ -132,8 +132,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -198224749
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayer: 5
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 3392871db6bb7ee4684d8f9e0e4f21c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -302,7 +302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236424224576537654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.031, z: 0}
+  m_LocalPosition: {x: 0, y: 0.058, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1236424225717936139}
@@ -543,9 +543,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveSpeed: 300
-  m_airMoveSpeed: 200
-  m_moveSmoothTime: 0.1
-  m_airMoveSmoothTime: 0.4
+  m_airMoveSpeed: 250
+  m_moveSmoothTime: 0.02
+  m_airMoveSmoothTime: 0.2
   m_jumpForce: 240
   m_groundLayers:
     serializedVersion: 2
@@ -553,10 +553,13 @@ MonoBehaviour:
   m_groundCheck: {fileID: 1236424224576537655}
   m_groundCheckRadius: 0.05
   m_rb2d: {fileID: 0}
+  m_controllable: 1
+  m_jumpCount: 0
   m_maxJump: 2
   m_isGrounded: 0
   m_isLeft: 0
   m_holdPosition: {fileID: 46373162}
+  m_onDeathCanvas: {fileID: 0}
 --- !u!50 &1236424225717936142
 Rigidbody2D:
   serializedVersion: 4
@@ -573,7 +576,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a89fc208c5284d74681e50a185d76343, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1

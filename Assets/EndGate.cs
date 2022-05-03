@@ -12,6 +12,7 @@ public class EndGate : MonoBehaviour
         if (other.tag == "Player")
         {
             m_levelController.LevelComplete();
+            other.GetComponent<PlayerController>().m_controllable = false;
         }
     }
 }

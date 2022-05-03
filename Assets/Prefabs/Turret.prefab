@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &434861794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434861795}
+  m_Layer: 9
+  m_Name: HealthDropPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434861795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434861794}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.857, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2333868651538676137}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2333868650368703623
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2333868650368703622}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,9 +70,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2333868651143394338}
   - component: {fileID: 2333868651143394341}
-  m_Layer: 0
+  - component: {fileID: 8358583211174841085}
+  - component: {fileID: 3076897897097484825}
+  m_Layer: 9
   m_Name: TurretBase
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +144,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8358583211174841085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333868651143394339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0423eeabed89f7b4eb9d5e97764f4a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 10
+  m_maxHealth: 10
+--- !u!61 &3076897897097484825
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333868651143394339}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.18699455}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 1}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.87818146, y: 0.3739891}
+  m_EdgeRadius: 0
 --- !u!1 &2333868651538676308
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,11 +195,11 @@ GameObject:
   - component: {fileID: 2333868651538676137}
   - component: {fileID: 2333868651538676311}
   - component: {fileID: 2333868651538676310}
-  - component: {fileID: 2333868651538676136}
+  - component: {fileID: 6844684196624811102}
   - component: {fileID: 2333868651538676139}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,6 +217,7 @@ Transform:
   m_Children:
   - {fileID: 2333868651143394338}
   - {fileID: 2333868651925965501}
+  - {fileID: 434861795}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,8 +271,23 @@ MonoBehaviour:
   m_shootSound: {fileID: 8300000, guid: 4a3b6bb0274d9d74c8b2e0c65b153780, type: 3}
   m_ammoPrefab: {fileID: 3308770922549290876, guid: f0ea393add44f634c8ddf5b777f46d41, type: 3}
   m_attackInterval: 1
+  m_onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6844684196624811102}
+        m_TargetAssemblyTypeName: ItemDrop, Assembly-CSharp
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_active: 1
---- !u!114 &2333868651538676136
+--- !u!114 &6844684196624811102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,11 +296,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2333868651538676308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0423eeabed89f7b4eb9d5e97764f4a63, type: 3}
+  m_Script: {fileID: 11500000, guid: d18c52615edfcc446bb9ad88821d651c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 10
-  m_maxHealth: 10
+  m_droppedItem: {fileID: 5505315931824558163, guid: e9ed8e7b45e15044781e89c7a128a641, type: 3}
+  m_dropPosition: {fileID: 0}
+  m_itemsToDrop: 2
 --- !u!82 &2333868651538676139
 AudioSource:
   m_ObjectHideFlags: 0
@@ -319,7 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2333868651925965501}
   - component: {fileID: 2333868651925965498}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TurretBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

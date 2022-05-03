@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class DamagePlayerOnContact : MonoBehaviour
 {
+    public bool m_active = true;
     public int m_damageAmount;
     private float m_lastDamageTime = -1000f;
     public float m_damageInterval = 1f;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && m_active)
         {
             PlayerStats ps = other.gameObject.GetComponent<PlayerStats>();
             if (ps != null)
@@ -24,7 +25,7 @@ public class DamagePlayerOnContact : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && m_active)
         {
             PlayerStats ps = other.gameObject.GetComponent<PlayerStats>();
             if (ps != null)
@@ -40,7 +41,7 @@ public class DamagePlayerOnContact : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && m_active)
         {
             m_lastDamageTime = -1000f;
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2460346068541084427}
   - component: {fileID: 2460346068541084420}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2460346069586873943}
   - component: {fileID: 2460346069586873941}
   - component: {fileID: 2916986288733328068}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8172077563838165389}
   - component: {fileID: 375421790924636889}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

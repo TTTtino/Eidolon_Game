@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1346418022846192384}
   - component: {fileID: 4163874730733041578}
   - component: {fileID: 5717122325417109703}
-  - component: {fileID: 3330847599534576244}
   - component: {fileID: 8572965387205403537}
   m_Layer: 14
   m_Name: HealthPickup
@@ -133,19 +132,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3330847599534576244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5505315931824558163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f7deeeca42680f46aae0d3f671f10f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_impactSounds: []
 --- !u!114 &8572965387205403537
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class Weapon : MonoBehaviour
 {
     public PlayerController m_attachedPlayer;
     [SerializeField] Transform m_shootTransform;
     [SerializeField] float m_moveToPlayerSpeed;
-    Rigidbody2D m_rb2d;
     private Vector3 m_targetPosition;
     [SerializeField] Vector2 m_pOffset;
     public int m_projectileIndex = 0;
@@ -17,7 +15,7 @@ public class Weapon : MonoBehaviour
     public List<Projectile> Projectiles { get { return m_projectiles; } set { m_projectiles = value; } }
     public Projectile m_currentProjectile = null;
 
-
+    public LayerMask m_shootThroughLayers;
     // UI
     [SerializeField] Image m_currentProjectileUI;
     void Awake()
@@ -36,7 +34,6 @@ public class Weapon : MonoBehaviour
         {
             m_currentProjectileUI.color = Color.black;
         }
-        m_rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -51,7 +48,7 @@ public class Weapon : MonoBehaviour
             }
             m_targetPosition = (Vector2)m_attachedPlayer.transform.position - offset;
 
-            m_rb2d.MovePosition(Vector3.MoveTowards(m_rb2d.position, m_targetPosition, m_moveToPlayerSpeed * (Vector3.Distance(m_targetPosition, m_rb2d.position) / 50f)));
+            transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, m_moveToPlayerSpeed * (Vector3.Distance(m_targetPosition, transform.position) / 50f));
         }
 
     }
@@ -71,8 +68,11 @@ public class Weapon : MonoBehaviour
 
     public void FireProjectile()
     {
-        Projectile p = Instantiate(m_currentProjectile, m_shootTransform.position, transform.rotation);
-        p.addSpawnVelocity(m_attachedPlayer.GetRBVelocity());
+        if (!Physics2D.OverlapCircle(m_shootTransform.position, 0.05f, m_shootThroughLayers))
+        {
+            Projectile p = Instantiate(m_currentProjectile, m_shootTransform.position, transform.rotation);
+            p.addSpawnVelocity(m_attachedPlayer.GetRBVelocity());
+        }
 
     }
 

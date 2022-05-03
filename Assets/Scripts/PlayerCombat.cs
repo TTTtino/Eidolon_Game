@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
     private PlayerStats m_stats;
     public PlayerStats Stats { get { return m_stats; } }
     public Weapon m_activeWeapon;
+    public PlayerController m_controller;
 
     private float m_lastAttackTime = -1000f;
     [SerializeField] private float m_attackInterval = 100f;
@@ -18,12 +19,13 @@ public class PlayerCombat : MonoBehaviour, IHittable
     void Awake()
     {
         m_stats = GetComponent<PlayerStats>();
+        m_controller = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_activeWeapon != null && m_stats.Health > 0)
+        if (m_activeWeapon != null && m_controller.m_controllable)
         {
             if (m_activeWeapon.m_currentProjectile != null)
             {
@@ -44,7 +46,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
 
     public void FireWeapon(InputAction.CallbackContext context)
     {
-        if (m_activeWeapon != null && m_stats.Health > 0)
+        if (m_activeWeapon != null && m_controller.m_controllable)
         {
             if (context.started)
             {
@@ -59,7 +61,7 @@ public class PlayerCombat : MonoBehaviour, IHittable
 
     public void SwitchWeapon(InputAction.CallbackContext context)
     {
-        if (m_activeWeapon != null && m_activeWeapon.Projectiles.Count > 0 && m_stats.Health > 0)
+        if (m_activeWeapon != null && m_activeWeapon.Projectiles.Count > 0 && m_controller.m_controllable)
         {
             if (context.started)
             {

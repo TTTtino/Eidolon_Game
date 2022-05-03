@@ -12,7 +12,6 @@ public class DamageEnemyOnCollision : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Damaging Enemey");
             EnemyStats es = other.gameObject.GetComponent<EnemyStats>();
             if (es != null)
             {

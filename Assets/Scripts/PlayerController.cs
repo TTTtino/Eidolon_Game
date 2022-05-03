@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private Animator m_animator;
     private bool m_mustJump = false;
     public bool m_controllable = true;
-    private int m_jumpCount = 0;
+    [SerializeField] private int m_jumpCount = 0;
     public int m_maxJump = 2;
     [SerializeField] private bool m_isGrounded = false;
     public bool Grounded { get { return m_isGrounded; } }
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_groundCheck.position, m_groundCheckRadius, m_groundLayers);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i].gameObject != gameObject && !m_isGrounded)
             {
                 m_isGrounded = true;
                 m_jumpCount = 0;
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
             m_controlDirection.y = 0;
             if (m_isGrounded || m_jumpCount < m_maxJump)
             {
+                // Debug.Log("Jump Count = " + m_jumpCount + ", m_maxJump = " + m_maxJump + ", isGrounded = " + m_isGrounded);
                 m_isGrounded = false;
                 m_jumpCount++;
                 Vector2 v = m_rb2d.velocity;
@@ -141,8 +142,11 @@ public class PlayerController : MonoBehaviour
                 if (nearestItem != null)
                 {
                     nearestItem.PickUpItem(gameObject);
+
+                    m_maxJump = 1;
                     m_heldItem = nearestItem;
                 }
+
             }
             else
             {
@@ -204,6 +208,7 @@ public class PlayerController : MonoBehaviour
                 rb2d.velocity = m_rb2d.velocity;
             }
             m_heldItem = null;
+            m_maxJump = 2;
         }
     }
 
@@ -217,8 +222,11 @@ public class PlayerController : MonoBehaviour
     {
         ShowOnDeathScreen();
         m_stats.Health = 0;
+        m_controlDirection = Vector2.zero;
         m_controllable = false;
         DropHeldItem();
+        m_animator.SetTrigger("death");
+        m_rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public void ShowOnDeathScreen()

@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour, IInteractor
+public class HealthPickup : MonoBehaviour
 {
     private int m_healthRecovered = 1;
-    public void Use()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        PlayerStats s = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        s.Health += m_healthRecovered;
-        Destroy(gameObject);
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerStats s = other.gameObject.GetComponent<PlayerStats>();
+            s.Health += m_healthRecovered;
+            Destroy(gameObject);
 
+        }
     }
 
 

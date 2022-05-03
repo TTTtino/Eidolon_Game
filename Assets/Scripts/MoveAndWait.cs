@@ -57,7 +57,7 @@ public class MoveAndWait : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (m_moving && enabled)
+        if (enabled)
         {
             Gizmos.color = Color.green;
             if (Application.isPlaying)

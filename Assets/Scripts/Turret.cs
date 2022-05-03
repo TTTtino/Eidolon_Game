@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Turret : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class Turret : MonoBehaviour
 
     private float m_lastAttackTime = -1000f;
     [SerializeField] private float m_attackInterval = 2f;
-
+    public UnityEvent m_onDeath;
+    EnemyStats m_stats;
     public bool m_active = true;
     public bool Active { get { return m_active; } set { m_active = value; } }
 
@@ -27,19 +29,24 @@ public class Turret : MonoBehaviour
     void Start()
     {
         m_source = GetComponent<AudioSource>();
+        m_stats = GetComponentInChildren<EnemyStats>();
+        Debug.Log(m_stats);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (!m_active)
         {
-
             m_rotation = Mathf.Lerp(m_rotation, 0, m_turnSpeed * Time.deltaTime);
             m_turretBarrel.transform.localRotation = Quaternion.Euler(0, 0, -m_rotation);
             return;
         }
-
+        if (m_stats.Health <= 0 && m_active)
+        {
+            Die();
+        }
         float angle = 0.0f;
         if (m_target != null)
         {
@@ -106,5 +113,11 @@ public class Turret : MonoBehaviour
         p.transform.position = m_shootPosition.position;
         p.transform.up = -m_turretBarrel.transform.up;
         m_source.PlayOneShot(m_shootSound);
+    }
+
+    void Die()
+    {
+        m_active = false;
+        m_onDeath.Invoke();
     }
 }

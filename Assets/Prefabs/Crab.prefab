@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8764173371441200827}
   - component: {fileID: 8764173371441200826}
+  - component: {fileID: 4654026250807436842}
   - component: {fileID: 8764173371441200829}
   - component: {fileID: 8764173371441200828}
   - component: {fileID: 8764173371441200824}
@@ -82,17 +83,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_groundCheck: {fileID: 8764173371338607093}
   m_wallCheck: {fileID: 8764173372510657925}
+  m_onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4654026250807436842}
+        m_TargetAssemblyTypeName: ItemDrop, Assembly-CSharp
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_detectionRadius: 2
   m_xMoveDist: 4.14
   m_moveSpeed: 1
   m_groundLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 33792
   m_target: {fileID: 0}
   m_canTarget:
     serializedVersion: 2
     m_Bits: 16640
   m_speedMultiplier: 10
+--- !u!114 &4654026250807436842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764173371441200831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18c52615edfcc446bb9ad88821d651c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_droppedItem: {fileID: 0}
+  m_dropPosition: {fileID: 0}
+  m_itemsToDrop: 0
 --- !u!50 &8764173371441200829
 Rigidbody2D:
   serializedVersion: 4
@@ -127,7 +158,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.21, y: 0.41}
+  m_Offset: {x: -0.20999998, y: 0.31631392}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -138,7 +169,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8}
+  m_Size: {x: 1, y: 0.61262786}
   m_EdgeRadius: 0
 --- !u!114 &8764173371441200824
 MonoBehaviour:
@@ -166,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a491733ee9070941b917e17c4331e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_active: 1
   m_damageAmount: 1
   m_damageInterval: 0.5
 --- !u!1 &8764173372510657924
