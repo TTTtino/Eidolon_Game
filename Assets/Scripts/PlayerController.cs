@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
         m_stats = GetComponent<PlayerStats>();
         m_starsCollected = 0;
         m_controllable = true;
+
+
+        Debug.Log("Awake called, player controller");
     }
 
     // Update is called once per frame
@@ -237,6 +240,7 @@ public class PlayerController : MonoBehaviour
     public void StarCollected()
     {
         m_starsCollected++;
+        LevelController.Instance.StarCollected(m_starsCollected);
     }
 
 

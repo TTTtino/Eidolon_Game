@@ -43,6 +43,9 @@ TagManager:
   - name: Backdrop
     uniqueID: 2537163663
     locked: 0
+  - name: TerrainBackground
+    uniqueID: 172584393
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -52,6 +55,9 @@ TagManager:
   - name: Midground
     uniqueID: 3311854391
     locked: 0
+  - name: UnlitTerrain
+    uniqueID: 2577661061
+    locked: 0
   - name: AbilityPickups
     uniqueID: 2389070361
     locked: 0
@@ -60,4 +66,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 4096742547
+    locked: 0
+  - name: Hidden Layer
+    uniqueID: 14696219
     locked: 0

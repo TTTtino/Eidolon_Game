@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
         if (!Physics2D.OverlapCircle(m_shootTransform.position, 0.05f, m_shootThroughLayers))
         {
             Projectile p = Instantiate(m_currentProjectile, m_shootTransform.position, transform.rotation);
-            p.addSpawnVelocity(m_attachedPlayer.GetRBVelocity());
+            // p.addSpawnVelocity(m_attachedPlayer.GetRBVelocity());
         }
 
     }
@@ -79,6 +79,7 @@ public class Weapon : MonoBehaviour
     public void PlayerPickedUp(PlayerController player)
     {
         m_attachedPlayer = player;
+        Debug.Log(m_projectiles);
         if (m_projectiles.Count > 0) m_currentProjectile = m_projectiles[0];
         if (m_currentProjectile != null)
         {

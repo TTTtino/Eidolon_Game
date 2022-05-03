@@ -66,8 +66,13 @@ public class Sensor : MonoBehaviour
     {
         if (Active)
         {
+            m_light.enabled = true;
             m_time += Time.deltaTime * m_swingSpeed;
             transform.localRotation = Quaternion.Slerp(Quaternion.Euler(0, 0, -m_rotationAngle), Quaternion.Euler(0, 0, +m_rotationAngle), (Mathf.Sin(m_time) + 1) / 2);
+        }
+        else
+        {
+            m_light.enabled = false;
         }
         // float a = Mathf.Deg2Rad * (m_detectionAngle * 2);
         // float x = (m_detectionDistance * Mathf.Sin(a)) / (Mathf.Sin((Mathf.PI - a) / 2));
@@ -78,11 +83,22 @@ public class Sensor : MonoBehaviour
 
     }
 
+    public void TurnOff()
+    {
+        m_active = false;
+        m_detectedObjects.Clear();
+    }
+
+    public void TurnOn()
+    {
+        m_active = true;
+        m_detectedObjects.Clear();
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (Active)
         {
-            m_light.enabled = true;
             if (!m_detectedObjects.Contains(other.gameObject)
             && (m_detectionLayers.value & (1 << other.transform.gameObject.layer)) > 0)
             {
@@ -94,10 +110,6 @@ public class Sensor : MonoBehaviour
                 }
 
             }
-        }
-        else
-        {
-            m_light.enabled = false;
         }
     }
 

@@ -7,11 +7,9 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private int m_health = 10;
     [SerializeField] private int m_maxHealth = 10;
 
-    private int m_damage = 1;
 
-    public float Health { get { return m_health; } }
-    public float MaxHealth { get { return m_maxHealth; } }
-    public float Damage { get { return m_damage; } }
+    public int Health { get { return m_health; } set { m_health = value; } }
+    public int MaxHealth { get { return m_maxHealth; } }
 
     private void Start()
     {

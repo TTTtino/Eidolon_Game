@@ -12,7 +12,8 @@ public class LevelButton : MonoBehaviour
     public Image[] m_starImages;
     public bool m_levelUnlocked;
     // Start is called before the first frame update
-    void Awake()
+
+    void Start()
     {
         int starsCollected = Mathf.Clamp(PlayerPrefs.GetInt(m_levelName + "Stars", 0), 0, 3);
         float secondsToComplete = PlayerPrefs.GetFloat(m_levelName + "Time", 0.0f);
@@ -41,16 +42,16 @@ public class LevelButton : MonoBehaviour
         TMP_Text bestTimeText = transform.Find("BestTime").GetComponent<TMP_Text>();
         if (secondsToComplete > 0)
         {
-            int mins = (int)Mathf.Floor(secondsToComplete / 60.0f);
-            int secs = (int)Mathf.Floor(secondsToComplete % 60);
-            int milSecs = (int)((secondsToComplete - secs) * 1000f);
+            Debug.Log(m_levelLabel + " " + secondsToComplete);
+            int mins = (int)(secondsToComplete / 60.0f);
+            int secs = (int)(secondsToComplete % 60);
 
-            bestTimeText.SetText("Best Time: <b> " + mins + "</b>:<b>" + secs + "</b>:<b>" + milSecs);
+            bestTimeText.SetText("Best Time: <b> " + mins + "</b>:<b>" + secs + "</b>");
 
         }
         else
         {
-            bestTimeText.SetText("Best Time: --:--:---");
+            bestTimeText.SetText("Best Time: --:--");
         }
 
     }

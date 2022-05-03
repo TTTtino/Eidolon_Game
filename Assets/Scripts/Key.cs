@@ -18,6 +18,8 @@ public class Key : MonoBehaviour, IInteractor
                 if (i != null)
                 {
                     i.Interact(this.gameObject);
+
+                    Destroy(gameObject);
                 }
             }
 

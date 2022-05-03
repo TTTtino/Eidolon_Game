@@ -240,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7648428471008702952, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
       propertyPath: m_levelLabel
-      value: Level 1
+      value: Switch On, Switch Off
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
@@ -276,7 +276,7 @@ RectTransform:
   m_Father: {fileID: 1095084330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.33649904}
+  m_AnchorMin: {x: 0, y: 0.3347473}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 113664618}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.66350096
+  m_Size: 0.6652527
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -759,7 +759,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -16.832275, y: 540}
+  m_SizeDelta: {x: -15.050232, y: 540}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &310356936
 MonoBehaviour:
@@ -877,7 +877,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -2461,7 +2461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7648428471008702952, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
       propertyPath: m_levelLabel
-      value: Level 2
+      value: Where did he go?
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
@@ -2560,13 +2560,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelButton (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4605525129069215578, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7648428471008702952, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
       propertyPath: m_levelName
       value: Level03
       objectReference: {fileID: 0}
     - target: {fileID: 7648428471008702952, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}
       propertyPath: m_levelLabel
-      value: Level3
+      value: The Finale
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b00f2c4a9b4d9cb4b978ded5e21073bb, type: 3}

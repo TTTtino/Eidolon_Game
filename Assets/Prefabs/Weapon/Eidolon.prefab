@@ -83,12 +83,10 @@ MonoBehaviour:
   m_moveToPlayerSpeed: 4.5
   m_pOffset: {x: 0, y: 0}
   m_projectileIndex: 0
-  m_projectiles:
-  - {fileID: 755755631, guid: 8469b3cb3adb0a240ad584f8e7734f3f, type: 3}
-  - {fileID: 2046281440163760637, guid: 76d1b29742ea95340aabdfaa7c4bda2f, type: 3}
-  - {fileID: 5908160380156094118, guid: e222b45a564698e4599f49bdba2e7388, type: 3}
-  - {fileID: 1634294226483875843, guid: c97341b9379542b4c8f814bf967592df, type: 3}
   m_currentProjectile: {fileID: 755755631, guid: 8469b3cb3adb0a240ad584f8e7734f3f, type: 3}
+  m_shootThroughLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_currentProjectileUI: {fileID: 0}
 --- !u!50 &1005777485
 Rigidbody2D:
@@ -102,7 +100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -268,7 +266,7 @@ MonoBehaviour:
   m_Color: {r: 0, g: 0.9960785, b: 0.9960785, a: 1}
   m_Intensity: 0.1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 000000001140d5b537e366c537efd91593542ff4
+  m_ApplyToSortingLayers: 000000001140d5b537e366c537efd91593542ff485fca399c96d490a
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 1
   m_LightOrder: 0

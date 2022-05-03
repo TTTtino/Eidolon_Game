@@ -41,6 +41,10 @@ public class Turret : MonoBehaviour
         {
             m_rotation = Mathf.Lerp(m_rotation, 0, m_turnSpeed * Time.deltaTime);
             m_turretBarrel.transform.localRotation = Quaternion.Euler(0, 0, -m_rotation);
+            if (m_stats.Health < m_stats.MaxHealth)
+            {
+                m_stats.Health = m_stats.MaxHealth;
+            }
             return;
         }
         if (m_stats.Health <= 0 && m_active)
@@ -86,7 +90,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (m_active && (m_hitLayers.value & (1 << other.transform.gameObject.layer)) > 0 && m_target == null)
+        if ((m_hitLayers.value & (1 << other.transform.gameObject.layer)) > 0 && m_target == null)
         {
             m_target = other.transform;
         }
@@ -94,7 +98,8 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (m_active && (m_hitLayers.value & (1 << other.transform.gameObject.layer)) > 0 && other.gameObject == m_target.gameObject)
+
+        if (m_target != null && (m_hitLayers.value & (1 << other.transform.gameObject.layer)) > 0 && other.gameObject == m_target.gameObject)
         {
             m_target = null;
         }
