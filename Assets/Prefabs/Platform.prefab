@@ -93,9 +93,7 @@ GameObject:
   - component: {fileID: 2579722847735473119}
   - component: {fileID: 2579722847735473116}
   - component: {fileID: 2579722847735473118}
-  - component: {fileID: 2579722847735473089}
   - component: {fileID: 8633838302629171252}
-  - component: {fileID: 1244281291}
   m_Layer: 10
   m_Name: Platform
   m_TagString: Untagged
@@ -160,21 +158,6 @@ PlatformEffector2D:
   m_UseSideFriction: 1
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &2579722847735473089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579722847735473117}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e034dc50b5544bc44b0f0c0ac069ed1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_pos: {x: 0, y: 0}
-  m_moving: 1
-  m_moveSpeed: 1
 --- !u!114 &8633838302629171252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,18 +174,6 @@ MonoBehaviour:
   m_moving: 1
   m_moveSpeed: 1
   m_waitTime: 1
---- !u!114 &1244281291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579722847735473117}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2c715d6a234f25458a385bd9ed113af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4197657797148665710
 GameObject:
   m_ObjectHideFlags: 0

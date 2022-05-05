@@ -5,20 +5,33 @@ using UnityEngine.Events;
 
 public class Crab : MonoBehaviour
 {
+    // Used to check if ground is in front
     public Transform m_groundCheck;
+    // Used to check if wall is in front
     public Transform m_wallCheck;
+    // Events called on death
     public UnityEvent m_onDeath;
+    // Radius where enemy can see player (even through walls)
     public float m_detectionRadius = 2f;
+    // how much to the left and right from it's origin the crab can move
     public float m_xMoveDist = 2f;
+    // movement speed
     public float m_moveSpeed = 1f;
+
     private Rigidbody2D m_rb2d;
+    // maximum left/right position in world
     private float m_maxLeft, m_maxRight;
+    // position on start
     private Vector3 m_origin;
+    // layers that is checked against for floor and ground
     public LayerMask m_groundLayers;
+    // acquired target on trigger enter
     public Transform m_target;
+    // layers that can be targeted
     public LayerMask m_canTarget;
     // Move speed when target aquired
     public float m_speedMultiplier = 2f;
+    // direction that the crab is moving in
     float xMoveDir = 1;
     EnemyStats m_stats;
     private bool m_dead = false;
@@ -55,10 +68,11 @@ public class Crab : MonoBehaviour
                 break;
             }
         }
+        // Idle actions
         if (m_target == null)
         {
             if (xMoveDir == 0) xMoveDir = -1;
-            if (Physics2D.OverlapCircle(m_wallCheck.position, 0.1f))
+            if (Physics2D.OverlapCircle(m_wallCheck.position, 0.1f, m_groundLayers))
             {
                 Debug.Log("Wall in front");
                 xMoveDir *= -1;
@@ -90,7 +104,7 @@ public class Crab : MonoBehaviour
             {
                 xMoveDir = -1;
             }
-        }
+        } // Attacking player actions
         else
         {
             if (Physics2D.OverlapCircle(m_groundCheck.position, 0.2f, m_groundLayers) && Physics2D.OverlapCircle(m_wallCheck.position, 0.1f, m_groundLayers) == null)

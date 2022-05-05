@@ -7,10 +7,14 @@ public class PressurePlate : MonoBehaviour
 {
     public AudioClip m_sound;
     private AudioSource m_source;
+    // Event triggered when player presses the pressure plate
     [SerializeField] UnityEvent m_onEnter;
+    // Event triggered when player leaves the pressure plate
     [SerializeField] UnityEvent m_onExit;
     public bool m_pressed;
+    // minimum rigidbody weight required to press the pressure plate
     public float m_minWeight = 1f;
+    // true if plate should not go up on leaving the plate
     public bool m_keepPressed;
     private Animator m_animator;
 
@@ -18,12 +22,6 @@ public class PressurePlate : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_source = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

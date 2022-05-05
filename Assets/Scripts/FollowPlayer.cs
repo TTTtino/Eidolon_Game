@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// moves towards player at followSpeed
 public class FollowPlayer : MonoBehaviour
 {
     private GameObject m_player;

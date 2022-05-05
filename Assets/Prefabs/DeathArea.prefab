@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 8763455208660201329}
   - component: {fileID: 8763455208660201330}
   - component: {fileID: 7690383730572704163}
+  - component: {fileID: 1914958537640077278}
   m_Layer: 0
   m_Name: DeathArea
   m_TagString: Untagged
@@ -289,5 +290,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39e37b3a267fe5c4888e6deb7fb4cc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1914958537640077278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763455208660201326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f9be85501b477419c3301cd8029ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Switch that can be activated by any interactor
 public class Switch : MonoBehaviour, IInteractable
 {
     [SerializeField] bool m_isOn = false;

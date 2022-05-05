@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+// Combat related script for player
 public class PlayerCombat : MonoBehaviour, IHittable
 {
-    // Start is called before the first frame update
     private PlayerStats m_stats;
     public PlayerStats Stats { get { return m_stats; } }
     public Weapon m_activeWeapon;
     public PlayerController m_controller;
 
+    // last time player shot their weapon
     private float m_lastAttackTime = -1000f;
     [SerializeField] private float m_attackInterval = 100f;
+    // true when attack input is being taken
     private bool m_mustAttack = false;
 
     void Awake()

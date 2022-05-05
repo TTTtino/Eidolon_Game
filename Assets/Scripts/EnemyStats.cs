@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Stores enemy health and max health (was meant to be extended for damage, stun resistance etc. but did not fit with game during level design)
 public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private int m_health = 10;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Interactor that can be used to activate nearby interactable
 public class Key : MonoBehaviour, IInteractor
 {
     [SerializeField] GameObject m_opens;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Turret that shoots at player when in range and has a direct line of sight
 public class Turret : MonoBehaviour
 {
     public Transform m_target;
@@ -13,9 +14,11 @@ public class Turret : MonoBehaviour
     [SerializeField] private float m_distance = 5;
     public LayerMask m_hitLayers;
     public Transform m_shootPosition;
+    // true when direct line of sight with target
     public bool m_targetLockedOn;
     private AudioSource m_source;
     public AudioClip m_shootSound;
+    // Ammo that is shot
     [SerializeField] private Projectile m_ammoPrefab;
 
     private float m_lastAttackTime = -1000f;

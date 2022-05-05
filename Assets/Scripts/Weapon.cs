@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class Weapon : MonoBehaviour
 {
     public PlayerController m_attachedPlayer;
+    // Position projectiles are instantiated at
     [SerializeField] Transform m_shootTransform;
+    // speed at which the weapon moves to the player
     [SerializeField] float m_moveToPlayerSpeed;
+    // position to move to when following player
     private Vector3 m_targetPosition;
+    // offset from player that the weapon stays at
     [SerializeField] Vector2 m_pOffset;
+    // current projectile that is active
     public int m_projectileIndex = 0;
-    // Controlled by LevelController
+    // Projectles that are available
     private List<Projectile> m_projectiles = null;
     public List<Projectile> Projectiles { get { return m_projectiles; } set { m_projectiles = value; } }
+    // active projectile
     public Projectile m_currentProjectile = null;
-
+    // Layers that the projectile can be instantiated inside
     public LayerMask m_shootThroughLayers;
-    // UI
+    // UI Image that shows the active projectile
     [SerializeField] Image m_currentProjectileUI;
-    void Awake()
-    {
 
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +80,7 @@ public class Weapon : MonoBehaviour
 
     }
 
+    // player picked up weapon
     public void PlayerPickedUp(PlayerController player)
     {
         m_attachedPlayer = player;
@@ -87,7 +92,7 @@ public class Weapon : MonoBehaviour
             m_currentProjectileUI.color = Color.white;
         }
     }
-
+    // player picked up weapon
     public void ProjectilePickedUp(Projectile projectile)
     {
         m_projectiles.Add(projectile);

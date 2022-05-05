@@ -11,6 +11,7 @@ public class DestroyOnContact : MonoBehaviour
         DestroyAfterDelay();
     }
 
+    // plays animation and then destroys itself
     void DestroyAfterDelay()
     {
         GetComponent<Animator>().SetTrigger("crumble");

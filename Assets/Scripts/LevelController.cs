@@ -5,25 +5,38 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+// Singleton class used to control the active level
 public class LevelController : MonoBehaviour
 {
     public static LevelController Instance;
+    // name of the level (used to store player prefs)
     public string m_levelName;
+    // Reference to weapon in scene
     public Weapon m_weapon;
+    // Stats of the player
     public PlayerStats m_playerStats;
+    // Name of the next level (used to change scene)
     public string m_nextLevelName;
     public PlayerController m_playerController;
     public PlayerCombat m_playerCombat;
+    // Gameobject with level complete UI
     public GameObject m_levelCompleteCanvas;
 
     // Projectiles available in this level
     public List<Projectile> m_weaponProjectiles;
+    // Players max health at this level
     public int m_playerMaxHealth = 10;
+    // true if player has weapon on start
     public bool m_playerHasWeapon = true;
+    // Images of stars (used to show when level complete)
     public Image[] m_lvlCompleteStars;
+    // Images of stars (used to show when playing the level)
     public Image[] m_lvlStars;
+    // Text to show current time elapsed
     public TMP_Text m_timeElapsedText;
+    // true if level is finsished
     private bool m_levelComplete;
+    // time in seconds that the level started at
     public float m_levelStartTime;
 
     void Awake()
@@ -37,7 +50,6 @@ public class LevelController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Debug.Log("Awake called, level controller");
 
     }
 
@@ -45,7 +57,6 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start called, level controller");
         m_levelStartTime = Time.time;
         m_weapon.Projectiles = m_weaponProjectiles;
         m_playerStats.MaxHealth = m_playerMaxHealth;
@@ -104,7 +115,7 @@ public class LevelController : MonoBehaviour
                 int mins = (int)(timeTaken / 60.0f);
                 int secs = (int)(timeTaken % 60);
 
-                m_timeElapsedText.SetText("<b> " + mins + "</b>:<b>" + secs + "</b>");
+                m_timeElapsedText.SetText("<b> " + mins.ToString("d2") + "</b>:<b>" + secs.ToString("d2") + "</b>");
 
             }
             else
@@ -125,6 +136,7 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
     }
 
+    // Set the stars collected when being played
     public void StarCollected(int numCollected)
     {
         for (int i = 0; i < m_lvlStars.Length; i++)

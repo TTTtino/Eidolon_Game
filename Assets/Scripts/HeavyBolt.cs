@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// not used in game (did not fit into game when started level design)
 public class HeavyBolt : Projectile
 {
-    // Start is called before the first frame update
+    // Uses gravity and single force on Start
     void Start()
     {
         m_rb2d.gravityScale = 1f;

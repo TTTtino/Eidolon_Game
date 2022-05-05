@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+// Button that shows level name, time, and stars collected
 public class LevelButton : MonoBehaviour
 {
     public string m_levelName;
@@ -46,7 +47,7 @@ public class LevelButton : MonoBehaviour
             int mins = (int)(secondsToComplete / 60.0f);
             int secs = (int)(secondsToComplete % 60);
 
-            bestTimeText.SetText("Best Time: <b> " + mins + "</b>:<b>" + secs + "</b>");
+            bestTimeText.SetText("Best Time: <b> " + mins.ToString("d2") + "</b>:<b>" + secs.ToString("d2") + "</b>");
 
         }
         else

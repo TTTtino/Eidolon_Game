@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Trap that swings in an arc motion
 public class SwingingTrap : MonoBehaviour
 {
     public AudioClip m_sound;
@@ -11,6 +12,7 @@ public class SwingingTrap : MonoBehaviour
     public bool Swinging
     {
         get { return m_swinging; }
+        // changes the sprite when swinging/not swinging
         set
         {
             m_swinging = value;
@@ -29,8 +31,9 @@ public class SwingingTrap : MonoBehaviour
     public float m_maxAngle;
     private float m_time = 0f;
 
-
+    // sprite when trap is inactive
     [SerializeField] Sprite m_offSprite;
+    // sprite when trap is active
     [SerializeField] Sprite m_onSprite;
 
     private void Start()

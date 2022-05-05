@@ -6,10 +6,13 @@ using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 public class Sensor : MonoBehaviour
 {
+    // Unity event triggered when an object enters trigger area
     [SerializeField] UnityEvent m_onDetected;
+    // Unity event triggered when an object leaves trigger area
     [SerializeField] UnityEvent m_onUndetected;
     [Range(0f, 20f)] public float m_swingSpeed;
     [SerializeField] private bool m_active;
+    // Layers which the sensor can detect
     [SerializeField] private LayerMask m_detectionLayers;
     public bool Active
     {
@@ -25,10 +28,13 @@ public class Sensor : MonoBehaviour
         }
     }
 
+    // Angle from center that the sensor rotates
     public float m_rotationAngle;
+    // Detection angle from the center
     public float m_detectionAngle;
     public float m_detectionDistance;
     private bool m_detected;
+    // objects that are in the detection zone
     private List<GameObject> m_detectedObjects;
     private Light2D m_light;
     private float m_time = 0f;
@@ -44,6 +50,7 @@ public class Sensor : MonoBehaviour
         m_detectedObjects = new List<GameObject>();
         m_collider = GetComponent<PolygonCollider2D>();
 
+        // Changes polygon collider to be cone shaped
         float a = Mathf.Deg2Rad * (m_detectionAngle * 2);
         Vector2[] ps = new Vector2[DETECTION_SEGMENTS + 2];
         ps[0] = Vector2.zero;

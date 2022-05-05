@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Projectile shot by turret
 public class TurretLaser : Projectile
 {
     // Start is called before the first frame update
@@ -12,9 +13,4 @@ public class TurretLaser : Projectile
         Debug.Log("Shots fired");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

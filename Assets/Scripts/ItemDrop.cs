@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Drops certain number of items on function call at specifed position
 public class ItemDrop : MonoBehaviour
 {
     public GameObject m_droppedItem;

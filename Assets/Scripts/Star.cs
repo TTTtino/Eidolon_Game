@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Star collectible in scene
 public class Star : MonoBehaviour
 {
     // Start is called before the first frame update

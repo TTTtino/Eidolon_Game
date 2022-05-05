@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DamageEnemyOnCollision : MonoBehaviour
 {
+    // damage enemy takes on collision
     public int m_damageAmount;
+    // time since last damage
     private float m_lastDamageTime = -1000f;
     public float m_damageInterval = 1f;
 

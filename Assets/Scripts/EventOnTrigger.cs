@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Component used to call certain unityevents on trigger enter and exit
 public class EventOnTrigger : MonoBehaviour
 {
     [SerializeField] UnityEvent m_onTriggerEnter;

@@ -4,30 +4,43 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+// Class for controlling generic player action
 public class PlayerController : MonoBehaviour
 {
+    // move speed on ground
     [SerializeField] private float m_moveSpeed;
     [SerializeField] private float m_airMoveSpeed;
+    // time it takes for movement to be smoothed when no longer taking input (0 means instant stop)
     [SerializeField] private float m_moveSmoothTime = 0.05f;
+    // time it takes for movement to be smoothed (in air) when no longer taking input (0 means instant stop)
     [SerializeField] private float m_airMoveSmoothTime = 0.4f;
+    // Force the player jumps with
     [SerializeField] private float m_jumpForce;
+    // Layers which count as grounded
     [SerializeField] private LayerMask m_groundLayers;
+    // Position where overlap circle will be done to check if it is ground
     [SerializeField] private Transform m_groundCheck;
     [SerializeField] private float m_groundCheckRadius;
     private int m_starsCollected = 0;
     public int StarsCollected { get { return m_starsCollected; } }
+    // Input direction
     private Vector2 m_controlDirection = Vector2.zero;
-    private PlayerStats m_stats;
     public Vector2 ControlDirection { get { return m_controlDirection; } }
+    private PlayerStats m_stats;
     public Rigidbody2D m_rb2d;
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
+    // input being recieved to jump
     private bool m_mustJump = false;
+    // if player can be controlled (false on death and level completion)
     public bool m_controllable = true;
-    [SerializeField] private int m_jumpCount = 0;
+    // number of jumps made
+    private int m_jumpCount = 0;
+    // maximum number of jumps allowed
     public int m_maxJump = 2;
-    [SerializeField] private bool m_isGrounded = false;
+    private bool m_isGrounded = false;
     public bool Grounded { get { return m_isGrounded; } }
+    // true when player facing left
     public bool m_isLeft;
     private Vector3 m_velocity = Vector3.zero;
     private Liftable m_heldItem;

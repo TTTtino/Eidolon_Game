@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Base class for all projectles
 public abstract class Projectile : MonoBehaviour
 {
     [SerializeField] protected float m_damage = 0.0f;

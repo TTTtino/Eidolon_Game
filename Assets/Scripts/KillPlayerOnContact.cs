@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KillPlayerOnContact : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // kills player on contact
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")

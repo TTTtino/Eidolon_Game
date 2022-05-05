@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Components used when gameobject can be lifted
 public class Liftable : MonoBehaviour
 {
+    // Sounds to be played on impact (chosen randomly)
     public AudioClip[] m_impactSounds;
+    // sprite that renders
     SpriteRenderer m_renderer;
+    // audio source to play sounds through
     private AudioSource m_source;
+    // Player holding the object
     PlayerController m_holder;
     Rigidbody2D m_rb2d;
+    // initial postition of the object
     private Vector3 m_spawnPos;
+    // true if should be respawned
     public bool m_respawn;
 
     private void Start()

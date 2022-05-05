@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Makes object move and wait between origin and some position
 public class MoveAndWait : MonoBehaviour
 {
 
+    // offset position from origin to move to
     [SerializeField] Vector2 m_pos;
     [SerializeField] private bool m_moving;
     [SerializeField] private float m_moveSpeed;
+    // Start position
     private Vector2 m_origin;
+    // target position
     private Vector2 m_targetPos;
+    // time that object waits at origin and targetPos
     [SerializeField] private float m_waitTime;
+    // true if object is waiting
     private bool m_waiting;
 
 

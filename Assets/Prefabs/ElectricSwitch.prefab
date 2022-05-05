@@ -154,14 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5f7ce372a12034caa392200d5d2f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isOn: 0
   m_onSwitchOn:
     m_PersistentCalls:
       m_Calls: []
   m_onSwitchOff:
     m_PersistentCalls:
       m_Calls: []
-  m_offSprite: {fileID: -1494352897237206093, guid: 8935dfda224628940b74372f94c62e0a, type: 3}
-  m_onSprite: {fileID: 5207117429831932417, guid: 8935dfda224628940b74372f94c62e0a, type: 3}
+  m_offSprite: {fileID: 5207117429831932417, guid: 8935dfda224628940b74372f94c62e0a, type: 3}
+  m_onSprite: {fileID: -1494352897237206093, guid: 8935dfda224628940b74372f94c62e0a, type: 3}
 --- !u!1 &9119831077069898640
 GameObject:
   m_ObjectHideFlags: 0

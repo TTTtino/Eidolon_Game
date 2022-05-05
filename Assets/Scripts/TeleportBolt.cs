@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Projectle that teleports player when it stops rolling
 public class TeleportBolt : Projectile
 {
     PlayerController m_attachedPlayer;
@@ -32,6 +33,7 @@ public class TeleportBolt : Projectile
         }
     }
 
+    // slows down projectle on contact
     private void OnCollisionStay2D(Collision2D other)
     {
 

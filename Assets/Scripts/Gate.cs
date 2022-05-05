@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
 
+
 public class Gate : MonoBehaviour, IInteractable
 {
     public AudioClip m_sound;
@@ -37,6 +38,7 @@ public class Gate : MonoBehaviour, IInteractable
 
     }
 
+    // Opens gate, disables light and plays sound
     public void Open()
     {
         if (!isOpen)
@@ -51,12 +53,14 @@ public class Gate : MonoBehaviour, IInteractable
         }
     }
 
+    // activates the gate open animation
     private void OpenGate()
     {
         isOpen = true;
         GetComponentInChildren<Animator>().SetBool("open", true);
     }
 
+    // Opens gate, enables light and plays sound
     public void Close()
     {
         if (isOpen == true)
@@ -70,21 +74,19 @@ public class Gate : MonoBehaviour, IInteractable
         }
     }
 
+    // activates the gate close animation
     private void CloseGate()
     {
         isOpen = false;
         GetComponentInChildren<Animator>().SetBool("open", false);
     }
 
+    // Toggles the gate
     public void Toggle()
     {
         if (isOpen) Close(); else Open();
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

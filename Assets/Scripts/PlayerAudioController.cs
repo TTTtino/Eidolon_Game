@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Audio controller for player
 public class PlayerAudioController : MonoBehaviour
 {
+    // List of audio that would be chosen from for each footstep
     public AudioClip[] footstepClips;
     private AudioSource m_audioSource;
     PlayerController m_playerController;
-    private float m_time;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +17,6 @@ public class PlayerAudioController : MonoBehaviour
         m_audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void PlayFootStepAudio()
     {

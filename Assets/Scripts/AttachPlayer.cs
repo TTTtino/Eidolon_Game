@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Attaches the player to an object on entering, and whilst the player is not providing a control direction
 public class AttachPlayer : MonoBehaviour
 {
     PlayerController pControl;
     Vector2 m_offset;
     bool m_playerOnObject;
+
     // Start is called before the first frame update
     void Start()
     {
