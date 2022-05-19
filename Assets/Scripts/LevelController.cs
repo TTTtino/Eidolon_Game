@@ -21,6 +21,7 @@ public class LevelController : MonoBehaviour
     public PlayerCombat m_playerCombat;
     // Gameobject with level complete UI
     public GameObject m_levelCompleteCanvas;
+    public GameObject m_gamePauseCanvas;
 
     // Projectiles available in this level
     public List<Projectile> m_weaponProjectiles;
@@ -38,6 +39,9 @@ public class LevelController : MonoBehaviour
     private bool m_levelComplete;
     // time in seconds that the level started at
     public float m_levelStartTime;
+    public bool m_gamePaused = false;
+    public bool m_playerDead = false;
+    public bool m_levelCompleted = false;
 
     void Awake()
     {
@@ -70,6 +74,7 @@ public class LevelController : MonoBehaviour
 
     public void LevelComplete()
     {
+        m_levelComplete = true;
         float timeTaken = Time.time - m_levelStartTime;
         m_levelCompleteCanvas.SetActive(true);
         m_playerController.m_controllable = false;
@@ -99,8 +104,45 @@ public class LevelController : MonoBehaviour
         PlayerPrefs.SetInt(m_nextLevelName + "Unlocked", 1);
     }
 
+    public void TogglePause()
+    {
+        if (!m_levelComplete && !m_playerDead)
+        {
+            if (m_gamePaused)
+            {
+                UnpauseGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+
+        }
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        m_gamePaused = true;
+        m_gamePauseCanvas.SetActive(true);
+        m_playerController.m_controllable = false;
+    }
+
+    private void UnpauseGame()
+    {
+
+        Time.timeScale = 1;
+        m_playerController.m_controllable = true;
+        m_gamePaused = false;
+        m_gamePauseCanvas.SetActive(false);
+    }
+
     public void RestartLevel()
     {
+        if (m_gamePaused)
+        {
+            UnpauseGame();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -128,11 +170,19 @@ public class LevelController : MonoBehaviour
 
     public void GoToNextLevel()
     {
+        if (m_gamePaused)
+        {
+            UnpauseGame();
+        }
         SceneManager.LoadScene(m_nextLevelName);
     }
 
     public void GoToMenu()
     {
+        if (m_gamePaused)
+        {
+            UnpauseGame();
+        }
         SceneManager.LoadScene("StartMenu");
     }
 

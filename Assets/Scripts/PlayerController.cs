@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         ShowOnDeathScreen();
+        LevelController.Instance.m_playerDead = true;
         m_stats.Health = 0;
         m_controlDirection = Vector2.zero;
         m_controllable = false;
